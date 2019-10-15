@@ -36,6 +36,7 @@
     "etag": "~1.8.1",
     "keyv": "~3.1.0",
     "normalize-url": "~4.4.1",
+    "object-hash": "~2.0.0",
     "pretty-ms": "~5.0.0"
   },
   "devDependencies": {
