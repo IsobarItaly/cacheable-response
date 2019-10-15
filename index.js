@@ -5,6 +5,7 @@ const createCompress = require('compress-brotli')
 const normalizeUrl = require('normalize-url')
 const { parse } = require('querystring')
 const prettyMs = require('pretty-ms')
+const hash = require('object-hash')
 const assert = require('assert')
 const getEtag = require('etag')
 const { URL } = require('url')
@@ -19,7 +20,7 @@ function isEmpty (value) {
   )
 }
 
-const _getKey = req => {
+const _getKey = (req, res, options = {}) => {
   const url = new URL(req.url, 'http://localhost').toString()
   const { origin } = new URL(url)
   const baseKey = normalizeUrl(url, {
@@ -32,7 +33,11 @@ const _getKey = req => {
       /^utm_\w+/i
     ]
   })
-  return baseKey.replace(origin, '').replace('/?', '')
+
+  const firstPartKey = baseKey.replace(origin, '').replace('/?', '')
+  const secondPartKey = hash(options)
+
+  return `${firstPartKey}__${secondPartKey}`
 }
 
 const toSeconds = ms => Math.floor(ms / 1000)
@@ -83,7 +88,7 @@ module.exports = ({
     const hasForce = Boolean(
       req.query ? req.query.force : parse(req.url.split('?')[1]).force
     )
-    const key = getKey(req, res)
+    const key = getKey(req, res, opts)
     const cachedResult = await decompress(await cache.get(key))
     const isHit = !hasForce && cachedResult !== undefined
     const result = isHit ? cachedResult : await get({ req, res, ...opts })

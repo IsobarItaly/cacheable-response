@@ -185,9 +185,9 @@ The value will be associated with [`stale-while-revalidate`](https://www.mnot.ne
 ##### getKey
 
 Type: `function`<br/>
-Default: `(req, res) => normalizeUrl(req.url)`
+Default: `(req, res) => normalizeUrl(req.url)__hash(options)`
 
-It determinates how the cache key should be computed, receiving `req, res` as input.
+It determinates how the cache key should be computed, receiving `req, res, options` as input.
 
 ##### get
 
