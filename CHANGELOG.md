@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.9.3]
+### [1.9.4](https://github.com/IsobarItaly/cacheable-response/compare/v1.9.3...v1.9.4) (2019-12-03)
+
+### [1.9.3](https://github.com/IsobarItaly/cacheable-response/compare/v1.7.3...v1.9.3) (2019-12-03)
 
 ### Features
 
