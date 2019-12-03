@@ -90,7 +90,7 @@ module.exports = ({
     )
     const key = getKey(req, res, opts)
     const cachedResult = await decompress(await cache.get(key))
-    const isHit = !hasForce && cachedResult !== undefined
+    const isHit = !hasForce && cachedResult !== undefined && cachedResult !== null
     const result = isHit ? cachedResult : await get({ req, res, ...opts })
 
     if (!result) return
